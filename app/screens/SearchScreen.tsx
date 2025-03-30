@@ -13,23 +13,51 @@ export default function SearchScreen() {
   const [results, setResults] = useState<any[]>([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1); // Track current page
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true); // Track if more results are available
 
-  const handleSearch = async () => {
+  const fetchResults = async (newSearch = false) => {
+    if (loading || (loadingMore && !newSearch)) return;
+
     try {
       setError('');
-      setLoading(true);
-      const response = await axios.get(`https://api.github.com/search/repositories?q=${query}`);
-      setResults(response.data.items || []); // Ensure results default to an empty array
-    } catch (err: any) {
+      if (newSearch) {
+        setLoading(true);
+        setPage(1);
+        setResults([]);
+      } else {
+        setLoadingMore(true);
+      }
+
+      const response = await axios.get(`https://api.github.com/search/repositories`, {
+        params: { q: query, page: newSearch ? 1 : page, per_page: 10 },
+      });
+
+      const newResults = response.data.items || [];
+      setResults((prev) => (newSearch ? newResults : [...prev, ...newResults]));
+
+      // GitHub API typically provides up to 1000 results, but check if fewer results are returned
+      setHasMore(newResults.length > 0);
+      if (newSearch) setPage(2);
+      else setPage((prev) => prev + 1);
+    } catch (err) {
       setError('Failed to fetch repositories. Please check your connection.');
-      setResults([]);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
+    }
+  };
+
+  const handleSearch = () => fetchResults(true);
+
+  const fetchMoreResults = () => {
+    if (hasMore && !loading && !loadingMore) {
+      fetchResults(false);
     }
   };
 
   const renderItem = ({ item }: { item: any }) => {
-    // Ensure owner exists before accessing properties
     const owner = item.owner || { avatar_url: '', login: 'Unknown' };
 
     return (
@@ -42,10 +70,7 @@ export default function SearchScreen() {
         <View style={{ flex: 1 }}>
           <Text style={styles.repoName}>{item.name}</Text>
           <Text style={styles.repoDescription}>{item.description || 'No description available'}</Text>
-          <Button
-            title="View Details"
-            onPress={() => navigation.navigate('Details', { repoId: item.id })}
-          />
+          <Button title="View Details" onPress={() => navigation.navigate('Details', { repoId: item.id })} />
         </View>
       </View>
     );
@@ -66,8 +91,11 @@ export default function SearchScreen() {
       {error ? <Text style={styles.error}>{error}</Text> : null}
       <FlatList
         data={results}
-        keyExtractor={(item) => item.id?.toString() || Math.random().toString()} // Fallback in case of missing id
+        keyExtractor={(item) => item.id?.toString() || Math.random().toString()}
         renderItem={renderItem}
+        onEndReached={fetchMoreResults} // Fetch more when user scrolls near bottom
+        onEndReachedThreshold={0.5} // Trigger when 50% from bottom
+        ListFooterComponent={loadingMore ? <ActivityIndicator size="small" style={styles.loader} /> : null}
       />
       <Button title="Go to Favorites" onPress={() => navigation.navigate('Favorites')} />
     </View>
@@ -95,10 +123,11 @@ const styles = StyleSheet.create({
     height: 50,
     marginRight: 8,
     borderRadius: 25,
-    backgroundColor: '#ddd', // Placeholder when no avatar exists
+    backgroundColor: '#ddd',
   },
   repoName: { fontWeight: 'bold' },
   repoDescription: { color: '#555' },
   error: { color: 'red', marginTop: 8 },
-  loader: { marginTop: 10 },
+  loader: { marginTop: 10, alignSelf: 'center' },
 });
+
