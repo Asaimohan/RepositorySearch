@@ -1,25 +1,43 @@
 import React, { createContext, useContext, useState } from 'react';
 import { useColorScheme } from 'react-native';
 
-// 1️⃣ Create a ThemeContext
+
+const lightColors = {
+  background: '#F8F9FA',
+  card: '#FFFFFF',
+  text: '#333333',
+  subText: '#555555',
+  primary: '#007AFF',
+};
+
+const darkColors = {
+  background: '#121212',
+  card: '#1E1E1E',
+  text: '#EAEAEA',
+  subText: '#B3B3B3',
+  primary: '#0A84FF',
+};
+
+
 const ThemeContext = createContext({
-  darkMode: false, // Default value
-  toggleTheme: () => {}, // Function to toggle theme
+  darkMode: false,
+  colors: lightColors, 
+  toggleTheme: () => {},
 });
 
-// 2️⃣ Create a ThemeProvider component
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const systemPreference = useColorScheme() === 'dark'; // Check system theme
-  const [darkMode, setDarkMode] = useState(systemPreference); // State for dark mode
 
-  const toggleTheme = () => setDarkMode((prev) => !prev); // Toggle function
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const systemPreference = useColorScheme() === 'dark';
+  const [darkMode, setDarkMode] = useState(systemPreference);
+
+  const toggleTheme = () => setDarkMode((prev) => !prev);
 
   return (
-    <ThemeContext.Provider value={{ darkMode, toggleTheme }}>
+    <ThemeContext.Provider value={{ darkMode, colors: darkMode ? darkColors : lightColors, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 };
 
-// 3️⃣ Create a custom hook to use theme
+
 export const useTheme = () => useContext(ThemeContext);
