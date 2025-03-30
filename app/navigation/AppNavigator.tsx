@@ -15,7 +15,10 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function AppNavigator() {
   return (
-    <Stack.Navigator initialRouteName="Search">
+    <Stack.Navigator 
+      initialRouteName="Search"
+      screenOptions={{ headerShown: false }} 
+    >
       <Stack.Screen name="Search" component={SearchScreen} />
       <Stack.Screen name="Details" component={DetailsScreen} />
       <Stack.Screen name="Favorites" component={FavoritesScreen} />
