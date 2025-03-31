@@ -47,7 +47,7 @@ GitHub Repository Explorer is a React Native application that allows users to se
 
 ## Demo 🎥
 
-![Demo](assets/images/Demo.gif)
+![Demo](assets/images/Demo_v1.gif)
 
 
 
