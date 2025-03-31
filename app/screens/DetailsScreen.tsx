@@ -111,7 +111,7 @@ export default function DetailsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#f4f4f4' },
+  container: { flex: 1, padding: 20,backgroundColor:'white' },
   darkContainer: { backgroundColor: '#121212' },
   avatar: { width: 100, height: 100, borderRadius: 50, alignSelf: 'center', marginBottom: 16 },
   title: { fontSize: 26, fontWeight: 'bold', textAlign: 'center', color: '#333' },
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   description: { fontSize: 16, marginBottom: 8, color: '#444', paddingRight: 50, fontWeight: 'bold' },
   info: { fontSize: 16, color: '#555', marginVertical: 4 },
   sectionTitle: { fontSize: 18, fontWeight: 'bold', color: '#333', marginVertical: 15 },
-  contributorCard: { backgroundColor: '#fff', padding: 10, borderRadius: 8, alignItems: 'center', marginRight: 10, width: 130, elevation: 3 },
+  contributorCard: { backgroundColor: '#fff',borderWidth:2,borderColor: '#C0C0C0', padding: 10, borderRadius: 12, alignItems: 'center', marginRight: 10, width: 130, elevation: 3 },
   contributorAvatar: { width: 70, height: 70, borderRadius: 30, marginBottom: 6 },
   contributorName: { fontSize: 14, fontWeight: 'bold', color: '#333', textAlign: 'center' },
   heartIcon: { position: 'absolute', top: 20, right: 20, zIndex: 1, },

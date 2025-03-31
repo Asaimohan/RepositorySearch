@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View, TextInput, Button, FlatList, Image, StyleSheet, ActivityIndicator,
-  Text, Alert, TouchableOpacity
-} from 'react-native';
+import {  View, TextInput, Button, FlatList, Image, StyleSheet, ActivityIndicator,Text, Alert, TouchableOpacity, SafeAreaView} from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -106,7 +103,7 @@ export default function SearchScreen() {
   };
 
   return (
-    <View style={[styles.container, darkMode && styles.containerDark]}>
+    <SafeAreaView style={[styles.container, darkMode && styles.containerDark]}>
       <LinearGradient
         colors={darkMode ? ['#2a2a2a', '#1e1e1e'] : ['#8f87f1', '#c68efd', '#e2a8f5', '#fed2e2']}
         start={{ x: 0, y: 0 }}
@@ -147,13 +144,14 @@ export default function SearchScreen() {
 
       <FlatList
         data={results}
-        keyExtractor={(item) => item.id?.toString() || Math.random().toString()}
+        keyExtractor={(item, index) => item.id ? item.id.toString() : `repo-${index}`}
+
         renderItem={renderItem}
         onEndReached={fetchMoreResults}
         onEndReachedThreshold={0.5}
         ListFooterComponent={loadingMore ? <ActivityIndicator size="small" style={styles.loader} /> : null}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -169,9 +167,16 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderWidth: 1.5,
     borderColor: '#C0C0C0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+
+
+    elevation: 6,
   },
   input: { flex: 1, fontSize: 16, color: '#333' },
-  inputDark: { color: '#fff', backgroundColor: '#333' },
+  inputDark: { color: 'black',  },
   toggleButton: {
     marginTop: -70,
     alignItems: 'center',
@@ -195,18 +200,14 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 200,
     overflow: 'hidden',
     height: 215,
-
-
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-
-
-    elevation: 6,
+    shadowOffset: { width: 2, height: 7 },
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    elevation:15,
   },
 
-  container: { flex: 1, padding: 16 },
+  container: { flex: 1, paddingLeft: 16 ,paddingRight: 16,backgroundColor:'white'},
 
 
   detailsButton: {

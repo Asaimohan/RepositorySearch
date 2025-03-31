@@ -3,7 +3,7 @@ import { useColorScheme } from 'react-native';
 
 
 const lightColors = {
-  background: '#F8F9FA',
+  background: 'white',
   card: '#FFFFFF',
   text: '#333333',
   subText: '#555555',
@@ -28,7 +28,7 @@ const ThemeContext = createContext({
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const systemPreference = useColorScheme() === 'dark';
-  const [darkMode, setDarkMode] = useState(systemPreference);
+  const [darkMode, setDarkMode] = useState(false);
 
   const toggleTheme = () => setDarkMode((prev) => !prev);
 
@@ -41,3 +41,4 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
 
 export const useTheme = () => useContext(ThemeContext);
+export default ThemeProvider;

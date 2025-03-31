@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     alignItems: 'center',
     padding: 12,
-    borderRadius: 10,
+    borderRadius: 10
+    ,borderWidth:1.5,borderColor: '#C0C0C0',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
