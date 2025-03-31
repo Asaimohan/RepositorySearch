@@ -25,7 +25,7 @@ GitHub Repository Explorer is a React Native application that allows users to se
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/repository-explorer.git
+   git clone https://github.com/Asaimohan/RepositorySearch.git
    cd repository-explorer
    ```
 2. Install dependencies:
@@ -43,11 +43,11 @@ GitHub Repository Explorer is a React Native application that allows users to se
 2. Search for any GitHub repository.
 3. Tap a repository to view its details.
 4. Click on the **heart icon** to add or remove favorites.
-5.Press the sun/moon button to change Theme .
+5.Press the * Sun/Moon * to change Theme .
 
 ## Demo 🎥
-![Watch the demo](assets/images/WhatsApp%20Image%202025-03-31%20at%2002.06.22_86d0c673.jpg)
-[Click here to watch the video](assets/images/Record_2025-03-31-02-02-33.mp4)
+<!-- ![Watch the demo](assets/images/WhatsApp%20Image%202025-03-31%20at%2002.06.22_86d0c673.jpg) -->
+(assets/images/Record_2025-03-31-02-02-33.mp4)
 
 
 
