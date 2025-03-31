@@ -52,11 +52,11 @@ GitHub Repository Explorer is a **React Native** application that allows users t
 
 ## Screenshots 📸
 
-| Light Mode | Dark Mode |
 
-| Search Screen | Repository Details |
+
+| Light Mode |  Dark Mode |
 |--------------|------------------|
-| ![Search](assets/images/Searchlight.jpg) | ![Search](assets/images/Searchlight.jpg) |
+| ![Search](assets/images/Searchlight.jpg) | ![Search](assets/images/SearchDark.jpg) |
 |--------------|------------------|
 | ![Details](assets/images/DetailLight.jpg) | ![Details](assets/images/DetailsDark.jpg) |
 |--------------|------------------|
