@@ -46,8 +46,8 @@ GitHub Repository Explorer is a React Native application that allows users to se
 5.Press the * Sun/Moon * to change Theme .
 
 ## Demo 🎥
-<!-- ![Watch the demo](assets/images/WhatsApp%20Image%202025-03-31%20at%2002.06.22_86d0c673.jpg) -->
-(assets/images/Record_2025-03-31-02-02-33.mp4)
+
+![Demo](assets/images/Demo.gif)
 
 
 
